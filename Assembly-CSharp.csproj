@@ -64,9 +64,30 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Controllers\MainGameController.cs" />
-    <Compile Include="Assets\Scripts\AbstractClasses\AbstractPlayer.cs" />
-    <Compile Include="Assets\Scripts\Bullet.cs" />
-    <Compile Include="Assets\Scripts\Player.cs" />
+    <Compile Include="Assets\Scripts\Bonuses\AttackSpeedBonus.cs" />
+    <Compile Include="Assets\Scripts\Bonuses\Bonus.cs" />
+    <Compile Include="Assets\Scripts\Bonuses\HealBonus.cs" />
+    <Compile Include="Assets\Scripts\Bullets\Bullet.cs" />
+    <Compile Include="Assets\Scripts\Bullets\BulletsFactory.cs" />
+    <Compile Include="Assets\Scripts\Bullets\WeakBullet.cs" />
+    <Compile Include="Assets\Scripts\Enemy\AbstarctEnemy.cs" />
+    <Compile Include="Assets\Scripts\Enemy\EasyEnemy.cs" />
+    <Compile Include="Assets\Scripts\Enemy\EasyEnemyCreator.cs" />
+    <Compile Include="Assets\Scripts\Enemy\EnemyCreator.cs" />
+    <Compile Include="Assets\Scripts\Enums\BonusTypes.cs" />
+    <Compile Include="Assets\Scripts\Enums\BulletDirectionState.cs" />
+    <Compile Include="Assets\Scripts\GameLevels\EasyLevel.cs" />
+    <Compile Include="Assets\Scripts\Interfaces\IEnemyObservable.cs" />
+    <Compile Include="Assets\Scripts\Interfaces\IEnemyObserver.cs" />
+    <Compile Include="Assets\Scripts\Interfaces\IGameStartegy.cs" />
+    <Compile Include="Assets\Scripts\Interfaces\IObservable.cs" />
+    <Compile Include="Assets\Scripts\Interfaces\IObserver.cs" />
+    <Compile Include="Assets\Scripts\Player\AbstractPlayer.cs" />
+    <Compile Include="Assets\Scripts\Player\Decorators\AbstractDecorator.cs" />
+    <Compile Include="Assets\Scripts\Player\Decorators\ImproveAttackSpeedDecorator.cs" />
+    <Compile Include="Assets\Scripts\Player\Decorators\SimpleAttackDecorator.cs" />
+    <Compile Include="Assets\Scripts\Player\Player.cs" />
+    <Compile Include="Assets\Scripts\StartMenu\StartSceneManager.cs" />
     <None Include="Assets\Models\GUI\png\README.txt" />
     <Reference Include="UnityEngine">
       <HintPath>F:/Unity/2019.4.11f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
