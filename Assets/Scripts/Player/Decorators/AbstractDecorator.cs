@@ -11,7 +11,7 @@ public abstract class AbstractDecorator : AbstractPlayer
         abstractPlayer = player;
     }
 
-    public virtual void SetTimer() { }
+    public virtual void SetValues(float value) { }
 
     public override void AddObserver(IObserver observer)
     {

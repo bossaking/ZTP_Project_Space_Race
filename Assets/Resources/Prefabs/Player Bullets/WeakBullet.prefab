@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -3132276037374136772}
   - component: {fileID: 5565411166882739395}
   m_Layer: 0
-  m_Name: PlayerWeakBullet
+  m_Name: WeakBullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -73,7 +73,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 10
   m_Sprite: {fileID: 21300000, guid: 2f95515d02942f94d8d5fc7f948a7965, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

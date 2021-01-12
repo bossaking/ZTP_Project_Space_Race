@@ -6,9 +6,8 @@ using UnityEngine.Events;
 public abstract class AbstarctEnemy : MonoBehaviour, IEnemyObservable
 {
 
-    protected static List<IEnemyObsever> observers;
 
-    protected static GameObject Bullet { get; set; }
+    protected abstract GameObject Bullet { get; set; }
     protected int Health { get; set; }
     protected int DamageForce { get; set; }
     protected Sprite EnemyShipSprite { get; set; }
@@ -17,8 +16,7 @@ public abstract class AbstarctEnemy : MonoBehaviour, IEnemyObservable
 
     public AbstarctEnemy()
     {
-        if (observers == null)
-            observers = new List<IEnemyObsever>();
+
     }
 
     protected abstract void Attack();
@@ -29,10 +27,6 @@ public abstract class AbstarctEnemy : MonoBehaviour, IEnemyObservable
         Destroy(gameObject);
     }
     protected abstract void Move();
-
-    private void Awake()
-    {
-    }
 
     private void FixedUpdate()
     {
@@ -49,22 +43,7 @@ public abstract class AbstarctEnemy : MonoBehaviour, IEnemyObservable
         }
     }
 
-    public void AddObserver(IEnemyObsever observer)
-    {
-        if (observers.Count == 0)
-            observers.Add(observer);
-    }
-
-    public void RemoveObserver(IEnemyObsever observer)
-    {
-        observers.Remove(observer);
-    }
-
-    public void NotifyObservers()
-    {
-        foreach (IEnemyObsever enemyObsever in observers)
-        {
-            enemyObsever.OnEnemyDestroy(gameObject.transform.position);
-        }
-    }
+    public abstract void AddObserver(IEnemyObsever observer);
+    public abstract void RemoveObserver(IEnemyObsever observer);
+    public abstract void NotifyObservers();
 }

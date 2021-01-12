@@ -7,4 +7,5 @@ public interface IGameStartegy
     List<GameObject> spawnPoints { get; set; }
     float EnemySpawnFrequency { get; set; } //in seconds
     void SpawnEnemies();
+    void SpawnBonus(Vector3 position);
 }

@@ -10,17 +10,21 @@ public abstract class Bullet : MonoBehaviour
 
     protected int Damage { get; set; }
 
+    protected bool alive = true;
 
     private void FixedUpdate()
     {
-        switch (BulletDirectionState)
+        if (alive)
         {
-            case BulletDirectionState.Player:
-                this.transform.position += new Vector3(0.3f, 0.0f, 0.0f);
-                break;
-            case BulletDirectionState.SimpleEnemy:
-                this.transform.position -= new Vector3(0.3f, 0.0f, 0.0f);
-                break;
+            switch (BulletDirectionState)
+            {
+                case BulletDirectionState.Player:
+                    this.transform.position += new Vector3(0.3f, 0.0f, 0.0f);
+                    break;
+                case BulletDirectionState.SimpleEnemy:
+                    this.transform.position -= new Vector3(0.3f, 0.0f, 0.0f);
+                    break;
+            }
         }
         
     }
@@ -28,19 +32,24 @@ public abstract class Bullet : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         string tag = collision.gameObject.tag;
+        
         if (tag.Equals("Player") && BulletDirectionState != BulletDirectionState.Player)
         {
             collision.gameObject.GetComponent<AbstractPlayer>().ReceiveDamage(Damage);
-            Destroy(gameObject);
+            DestroyBullet();
+            alive = false;
         }
         if (tag.Equals("Enemy") && BulletDirectionState != BulletDirectionState.SimpleEnemy)
         {
             collision.gameObject.GetComponent<AbstarctEnemy>().ReceiveDamage(Damage);
-            Destroy(gameObject);
+            DestroyBullet();
+            alive = false;
         }
         if (tag.Equals("Border"))
         {
             Destroy(gameObject);
         }
     }
+
+    protected abstract void DestroyBullet();
 }

@@ -6,9 +6,26 @@ using UnityEngine.SceneManagement;
 public class StartSceneManager : MonoBehaviour
 {
 
-    public void LoadMainGameScene()
+    public GameObject StartMenuPanel;
+    public GameObject ChooseBackgroundPanel;
+    public GameObject SettingsPanel;
+
+    public void StartGamePressed()
     {
-        SceneManager.LoadScene(1);
+        StartMenuPanel.SetActive(false);
+        ChooseBackgroundPanel.SetActive(true);
+    }
+
+    public void SettingsPressed()
+    {
+        SettingsPanel.SetActive(true);
+        StartMenuPanel.SetActive(false);
+    }
+
+    public void BackToStartMenu(GameObject panel)
+    {
+        panel.SetActive(false);
+        StartMenuPanel.SetActive(true);
     }
 
     public void QuitGame()

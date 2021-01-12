@@ -26,7 +26,9 @@ public class BulletsFactory : MonoBehaviour
             bullets = new Dictionary<string, GameObject>
             {
                 { "PlayerWeakBullet", Resources.Load<GameObject>("Prefabs/Player Bullets/WeakBullet") },
-                { "EnemyWeakBullet", Resources.Load<GameObject>("Prefabs/Enemy Bullets/WeakBullet") }
+                { "EnemyWeakBullet", Resources.Load<GameObject>("Prefabs/Enemy Bullets/WeakBullet") },
+                { "EnemyNormalBullet", Resources.Load<GameObject>("Prefabs/Enemy Bullets/NormalBullet") },
+                { "EnemyStrongBullet", Resources.Load<GameObject>("Prefabs/Enemy Bullets/StrongBullet") }
             };
         }
     }

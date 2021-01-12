@@ -5,14 +5,16 @@ using UnityEngine;
 public class ImproveAttackSpeedDecorator : AbstractDecorator
 {
     float duration;
+    float bonusValue;
 
     public override void ReceiveAttackSpeedImproveBonus(float value)
     {
         return;
     }
 
-    public override void SetTimer()
+    public override void SetValues(float value)
     {
+        bonusValue = value;
         duration = 5f;
         StartCoroutine(Timer());
     }
@@ -20,7 +22,7 @@ public class ImproveAttackSpeedDecorator : AbstractDecorator
     public override void Attack()
     {
         Instantiate(abstractPlayer.WeakBullet, abstractPlayer.BulletGun.transform.position, Quaternion.identity);
-        abstractPlayer.Invoke(nameof(abstractPlayer.Attack), 0.1f);
+        abstractPlayer.Invoke(nameof(abstractPlayer.Attack), bonusValue);
     }
 
     private IEnumerator Timer()
@@ -28,7 +30,7 @@ public class ImproveAttackSpeedDecorator : AbstractDecorator
         if (duration > 0)
         {
             duration--;
-            yield return new WaitForSecondsRealtime(1f);
+            yield return new WaitForSeconds(1f);
             StartCoroutine(Timer());
         }
         else
@@ -37,5 +39,12 @@ public class ImproveAttackSpeedDecorator : AbstractDecorator
         }
     }
 
-   
+    public override void ReceiveAttackSpeedBlowBonus(float value)
+    {
+        abstractPlayer.Decorator = gameObject.GetComponent<BlowAttackSpeedDecorator>();
+        abstractPlayer.Decorator.SetValues(value);
+        abstractPlayer.CancelInvoke();
+        StopAllCoroutines();
+        abstractPlayer.Invoke(nameof(abstractPlayer.Attack), 0);
+    }
 }

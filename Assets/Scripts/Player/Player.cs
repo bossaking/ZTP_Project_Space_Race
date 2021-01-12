@@ -7,28 +7,36 @@ public class Player : AbstractPlayer
 {
     private SpriteRenderer mSpriteRenderer;
     private Collider2D mCollider;
-    private Sprite playerShipSprite;
+    private readonly Sprite playerShipSprite;
+
+    private Animator anim;
 
     //Player movement
     [Header("Player Movement Settings")]
     private float minY, maxY;
     public float playerMovementSpeed = 0.1f; //in points
 
-    
+
 
     private void Start()
     {
+        anim = GetComponent<Animator>();
         mSpriteRenderer = GetComponent<SpriteRenderer>();
         mCollider = GetComponent<Collider2D>();
         gameObject.AddComponent<BulletsFactory>();
         Decorator = gameObject.GetComponent<SimpleAttackDecorator>();
         Decorator.SetPlayer(this);
 
-        AttackDelay = 1f;
+        AttackDelay = 0.7f;
         PlayerHealth = 100;
-        PlayerMaxHealth = 101;
-        PlayerNickname = "Player";
+        PlayerMaxHealth = 100;
+        PlayerNickname = PlayerPrefs.GetString("nickname");
+        if (PlayerNickname.Equals(string.Empty))
+        {
+            PlayerNickname = $"Player{UnityEngine.Random.Range(0, 1000)}";
+        }
         PlayerDamageForce = 10;
+        PlayerState = gameObject.AddComponent<NotDamagedState>();
 
         CalculateMinMaxY();
 
@@ -93,6 +101,11 @@ public class Player : AbstractPlayer
 
     }
 
+    public override void ReceiveAttackSpeedBlowBonus(float value)
+    {
+        Decorator.ReceiveAttackSpeedBlowBonus(value);
+    }
+
     #endregion
 
     #region Player Damage
@@ -100,6 +113,25 @@ public class Player : AbstractPlayer
     public override void ReceiveDamage(int damageValue)
     {
         PlayerHealth -= damageValue;
+        Debug.Log(PlayerHealth);
+        PlayerState.ReceiveDamage(this, damageValue);
+        if(PlayerHealth <= 0)
+        {
+            anim.SetTrigger("Death");
+            GetComponent<Collider2D>().enabled = false;
+            CancelInvoke();
+            Invoke(nameof(Lose), 0.8f);
+        }
+        else
+        {
+            NotifyObservers();
+        }
+        
+    }
+
+    private void Lose()
+    {
+        Destroy(gameObject);
         NotifyObservers();
     }
 
@@ -108,7 +140,11 @@ public class Player : AbstractPlayer
     public override void Heal(int healValue)
     {
         PlayerHealth += healValue;
-        PlayerHealth %= PlayerMaxHealth;
+        PlayerState.Heal(this, healValue);
+
+        if (PlayerHealth > PlayerMaxHealth)
+            PlayerHealth = PlayerMaxHealth;
+
         NotifyObservers();
     }
 
@@ -129,8 +165,14 @@ public class Player : AbstractPlayer
         foreach (IObserver observer in Observers)
         {
             observer.UpdatePlayerInformations(PlayerHealth);
+            if(PlayerHealth <= 0)
+            {
+                observer.Lose();
+            }
         }
     }
+
+
 
     #endregion
 }

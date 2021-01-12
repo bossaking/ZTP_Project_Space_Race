@@ -5,14 +5,18 @@ using UnityEngine;
 public abstract class AbstractPlayer : MonoBehaviour, IObservable
 {
     protected static List<IObserver> Observers { get; set; }
-    protected int PlayerHealth { get; set; }
-    protected int PlayerMaxHealth { get; set; }
+    public int PlayerHealth { get; set; }
+    public int PlayerMaxHealth { get; set; }
+    public IPlayerState PlayerState { get; set; }
+    public GameObject lowSmoke;
+    public GameObject fire;
     protected string PlayerNickname { get; set; }
     protected int PlayerDamageForce { get; set; }
     public GameObject BulletGun;
     public GameObject WeakBullet;
     public float AttackDelay;
-    public abstract void ReceiveAttackSpeedImproveBonus(float value); 
+    public abstract void ReceiveAttackSpeedImproveBonus(float value);
+    public abstract void ReceiveAttackSpeedBlowBonus(float value);
     public AbstractDecorator Decorator;
 
 

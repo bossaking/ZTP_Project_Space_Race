@@ -8,6 +8,9 @@ TagManager:
   - Easy Enemy Spawn Point
   - Enemy
   - Bonus
+  - Background
+  - Level Style
+  - Spawn Point
   layers:
   - Default
   - TransparentFX
@@ -44,4 +47,7 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: PausePanel
+    uniqueID: 595946979
     locked: 0

@@ -6,17 +6,19 @@ public class EasyLevel : MonoBehaviour, IGameStartegy, IEnemyObsever
 {
     public EnemyCreator EnemyCreator { get; set; }
     public List<GameObject> spawnPoints { get; set; }
-    public List<GameObject> weakGoodBonuses;
+    public List<GameObject> weakBonuses;
     private GameObject lastSpawnPoint, removedSpawnPoint;
     public float EnemySpawnFrequency { get; set; } //in seconds
+
 
     private void Awake()
     {
         EnemyCreator = gameObject.AddComponent<EasyEnemyCreator>();
         spawnPoints = new List<GameObject>();
-        spawnPoints.AddRange(GameObject.FindGameObjectsWithTag("Easy Enemy Spawn Point"));
-        weakGoodBonuses = new List<GameObject>();
-        weakGoodBonuses.AddRange(Resources.LoadAll<GameObject>("Prefabs/Bonuses/Weak Bonuses/Good Bonuses"));
+        spawnPoints.AddRange(GameObject.FindGameObjectsWithTag("Spawn Point"));
+        weakBonuses = new List<GameObject>();
+        weakBonuses.AddRange(Resources.LoadAll<GameObject>("Prefabs/Bonuses/Weak Bonuses/Good Bonuses"));
+        weakBonuses.AddRange(Resources.LoadAll<GameObject>("Prefabs/Bonuses/Weak Bonuses/Bad Bonuses"));
 
         EnemySpawnFrequency = 1.5f;
     }
@@ -27,13 +29,12 @@ public class EasyLevel : MonoBehaviour, IGameStartegy, IEnemyObsever
         {
             spawnPoints.Remove(removedSpawnPoint);
         }
-
-        GameObject mEasyEnemyPrefab = EnemyCreator.CreateEnemy();
-        mEasyEnemyPrefab.gameObject.GetComponent<AbstarctEnemy>().AddObserver(this);
+        
         int randomPosition = Random.Range(0, spawnPoints.Count);
         lastSpawnPoint = spawnPoints[randomPosition];
-        Instantiate(mEasyEnemyPrefab, lastSpawnPoint.transform.position, Quaternion.identity);
-        if(removedSpawnPoint == null)
+        GameObject mEasyEnemyPrefab = Instantiate(EnemyCreator.CreateEnemy(), lastSpawnPoint.transform.position, Quaternion.identity);
+        mEasyEnemyPrefab.gameObject.GetComponent<AbstarctEnemy>().AddObserver(this);
+        if (removedSpawnPoint == null)
         {
             removedSpawnPoint = lastSpawnPoint;
         }
@@ -46,10 +47,10 @@ public class EasyLevel : MonoBehaviour, IGameStartegy, IEnemyObsever
         Invoke(nameof(SpawnEnemies), EnemySpawnFrequency);
     }
 
-    private void SpawnBonus(Vector3 position)
+    public void SpawnBonus(Vector3 position)
     {
-        int randomPosition = Random.Range(0, weakGoodBonuses.Count);
-        Instantiate(weakGoodBonuses[randomPosition], position, Quaternion.identity);
+        int randomPosition = Random.Range(0, weakBonuses.Count);
+        Instantiate(weakBonuses[randomPosition], position, Quaternion.identity);
     }
 
     public void OnEnemyDestroy(Vector3 position)
