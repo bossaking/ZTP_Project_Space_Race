@@ -9,7 +9,6 @@ public abstract class LevelStyle : MonoBehaviour
 
     private void OnEnable()
     {
-        SceneManager.sceneLoaded += SceneManager_sceneLoaded;
         SceneManager.activeSceneChanged += SceneManager_activeSceneChanged;
     }
 
@@ -20,7 +19,7 @@ public abstract class LevelStyle : MonoBehaviour
         {
             if (SceneManager.GetActiveScene().buildIndex == 0)
             {
-                Destroy(gameObject);
+                Destroy();
             }
         }
         catch(Exception ex)
@@ -29,10 +28,7 @@ public abstract class LevelStyle : MonoBehaviour
         }
     }
 
-    private void SceneManager_sceneLoaded(Scene arg0, LoadSceneMode arg1)
-    {
 
-    }
 
     public void SetLevelStyle()
     {

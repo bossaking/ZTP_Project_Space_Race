@@ -98,7 +98,6 @@ public class Player : AbstractPlayer
     public override void ReceiveAttackSpeedImproveBonus(float value)
     {
         Decorator.ReceiveAttackSpeedImproveBonus(value);
-
     }
 
     public override void ReceiveAttackSpeedBlowBonus(float value)
@@ -170,8 +169,5 @@ public class Player : AbstractPlayer
             }
         }
     }
-
-
-
     #endregion
 }

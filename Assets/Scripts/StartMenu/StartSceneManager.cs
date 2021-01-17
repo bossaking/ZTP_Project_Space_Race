@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class StartSceneManager : MonoBehaviour
 {
@@ -18,8 +19,8 @@ public class StartSceneManager : MonoBehaviour
 
     public void SettingsPressed()
     {
-        SettingsPanel.SetActive(true);
         StartMenuPanel.SetActive(false);
+        SettingsPanel.SetActive(true);
     }
 
     public void BackToStartMenu(GameObject panel)

@@ -43,7 +43,6 @@ public class EasyLevel : MonoBehaviour, IGameStartegy, IEnemyObsever
             spawnPoints.Add(removedSpawnPoint);
             removedSpawnPoint = lastSpawnPoint;
         }
-        removedSpawnPoint = lastSpawnPoint;
         Invoke(nameof(SpawnEnemies), EnemySpawnFrequency);
     }
 

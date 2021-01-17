@@ -21,7 +21,7 @@ public class HardLevel : MonoBehaviour, IGameStartegy, IEnemyObsever
         strongBonuses.AddRange(Resources.LoadAll<GameObject>("Prefabs/Bonuses/Strong Bonuses/Good Bonuses"));
         strongBonuses.AddRange(Resources.LoadAll<GameObject>("Prefabs/Bonuses/Strong Bonuses/Bad Bonuses"));
 
-        EnemySpawnFrequency = 1.5f;
+        EnemySpawnFrequency = 2f;
     }
 
     public void OnEnemyDestroy(Vector3 position)
@@ -58,7 +58,6 @@ public class HardLevel : MonoBehaviour, IGameStartegy, IEnemyObsever
             spawnPoints.Add(removedSpawnPoint);
             removedSpawnPoint = lastSpawnPoint;
         }
-        removedSpawnPoint = lastSpawnPoint;
         Invoke(nameof(SpawnEnemies), EnemySpawnFrequency);
     }
 }

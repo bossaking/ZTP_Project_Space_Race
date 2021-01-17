@@ -21,7 +21,7 @@ public class NormalLevel : MonoBehaviour, IGameStartegy, IEnemyObsever
         normalBonuses.AddRange(Resources.LoadAll<GameObject>("Prefabs/Bonuses/Normal Bonuses/Good Bonuses"));
         normalBonuses.AddRange(Resources.LoadAll<GameObject>("Prefabs/Bonuses/Normal Bonuses/Bad Bonuses"));
 
-        EnemySpawnFrequency = 1.25f;
+        EnemySpawnFrequency = 1.75f;
     }
 
 
@@ -46,7 +46,6 @@ public class NormalLevel : MonoBehaviour, IGameStartegy, IEnemyObsever
             spawnPoints.Add(removedSpawnPoint);
             removedSpawnPoint = lastSpawnPoint;
         }
-        removedSpawnPoint = lastSpawnPoint;
         Invoke(nameof(SpawnEnemies), EnemySpawnFrequency);
     }
 
