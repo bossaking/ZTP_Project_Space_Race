@@ -51,10 +51,10 @@ public class MainGameController : MonoBehaviour, IObserver
         Instantiate(mPlayerPrefab, playerInstantiationPoint.transform.position, Quaternion.identity);
     }
 
-    public void UpdatePlayerInformations(int playerHealth)
+    public void UpdatePlayerInformations(float playerHealth)
     {
         Debug.Log(playerHealth);
-        playerHealthBarIndicatorImage.fillAmount = (float)playerHealth / 100;
+        playerHealthBarIndicatorImage.fillAmount = playerHealth / 100;
     }
 
     public void Lose()

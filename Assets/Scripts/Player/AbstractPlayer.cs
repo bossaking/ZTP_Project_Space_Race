@@ -5,7 +5,7 @@ using UnityEngine;
 public abstract class AbstractPlayer : MonoBehaviour, IObservable
 {
     protected static List<IObserver> Observers { get; set; }
-    public int PlayerHealth { get; set; }
+    public float PlayerHealth { get; set; }
     public int PlayerMaxHealth { get; set; }
     public IPlayerState PlayerState { get; set; }
     public GameObject lowSmoke;

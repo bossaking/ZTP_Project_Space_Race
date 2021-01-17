@@ -7,6 +7,9 @@ public class MiddleDamagedState : MonoBehaviour, IPlayerState
 
     public void Heal(AbstractPlayer player, int healValue)
     {
+
+        player.PlayerHealth += healValue * 1.1f;
+
         if(player.PlayerHealth / (player.PlayerMaxHealth / 100) > 80)
         {
             SetVisibleDamage(player);
@@ -17,6 +20,9 @@ public class MiddleDamagedState : MonoBehaviour, IPlayerState
 
     public void ReceiveDamage(AbstractPlayer player, int damageValue)
     {
+
+        player.PlayerHealth -= damageValue * 0.9f;
+
         if (player.PlayerHealth / (player.PlayerMaxHealth / 100) <= 45)
         {
             player.PlayerState = gameObject.AddComponent<HighDamagedState>();

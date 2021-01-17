@@ -1,6 +1,6 @@
 ﻿
 public interface IObserver
 {
-    void UpdatePlayerInformations(int playerHealth);
+    void UpdatePlayerInformations(float playerHealth);
     void Lose();
 }

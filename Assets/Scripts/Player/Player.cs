@@ -112,7 +112,7 @@ public class Player : AbstractPlayer
 
     public override void ReceiveDamage(int damageValue)
     {
-        PlayerHealth -= damageValue;
+        
         Debug.Log(PlayerHealth);
         PlayerState.ReceiveDamage(this, damageValue);
         if(PlayerHealth <= 0)
@@ -139,7 +139,6 @@ public class Player : AbstractPlayer
 
     public override void Heal(int healValue)
     {
-        PlayerHealth += healValue;
         PlayerState.Heal(this, healValue);
 
         if (PlayerHealth > PlayerMaxHealth)

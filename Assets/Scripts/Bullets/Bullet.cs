@@ -26,7 +26,6 @@ public abstract class Bullet : MonoBehaviour
                     break;
             }
         }
-        
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
